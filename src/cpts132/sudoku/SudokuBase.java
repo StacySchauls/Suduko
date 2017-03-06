@@ -12,6 +12,7 @@ public abstract class SudokuBase extends java.util.Observable {
         rows = layoutRows;
         columns = layoutColumns;
         size = columns * rows;
+       
     }
     
     public int getRows() {
@@ -25,6 +26,7 @@ public abstract class SudokuBase extends java.util.Observable {
     public int getSize() {
         return size;
     }
+   
     
     public abstract int getValue(int row, int col);
     

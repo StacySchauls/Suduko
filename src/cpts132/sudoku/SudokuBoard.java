@@ -1,26 +1,23 @@
 package cpts132.sudoku;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 
 public class SudokuBoard extends javax.swing.JComponent {
   
-    private Color c = new Color(220,220,220);
+        
     
-    private int size =0;
-    private int rows = 0;
-    private int col = 0;
+    
     public SudokuBoard(SudokuBase b) {
         setPreferredSize(new java.awt.Dimension(b.getSize()*50, b.getSize()*50));
-        this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-        System.out.println(b.getSize());
-        size = b.getSize();
-        rows = b.getRows();
-        col = b.getColumns();  
+       
     }
     
     SudokuBase getBase() {
@@ -28,52 +25,66 @@ public class SudokuBoard extends javax.swing.JComponent {
     }
     
     public static void main(String[] args) {
+        JPanel controls;
+        SudokuBase base;
+        drawBoard board;
+        SelectedCell selected;
+        JLabel output;
+        JLabel error;
+        JButton query;
+        JButton set;
+        JTextField txtRow;
+        JTextField txtCol;
+        JFrame win;
         
-        javax.swing.JFrame win = new javax.swing.JFrame("Test 2x3");
-        win.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
-        JComponent c = new SudokuBoard(new SudokuStub(2,3));
-        GridLayout grid = new GridLayout(6,6,2,2);
-        win.add(c);
-        c.setLayout(grid);
+        
        
         
-       // c.setBorder(new EmptyBorder(2,2,2,2));
+        
+        
+        
+        
+        
+        
+        
+        
+        win = new JFrame("Title");
+        win.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JPanel pnl = new JPanel();
+        pnl.setBackground(Color.cyan);
+        
+        board = new drawBoard(3,2);
+        
+        pnl.add(board);
+        
+        win.add(pnl);
+        //win.add(controls, java.awt.BorderLayout.SOUTH);
+       // controls.add(pnl = new JPanel());
+        SelectCell cell = new SelectCell();
+        pnl.addMouseListener(cell);
+        pnl.add(new JButton("Query"));
+        board.add(new JButton("Button"));
+        
+        int column = cell.getSelectedColumn();
+        int selectRow = cell.getSelectedRow();
+        HighlightCell high = new HighlightCell(column, selectRow);
+       
+       board.add(high); 
        
         
-        for(int i =0; i <36; i++){
-            c.add(new drawBoard());
-        }
-         
         
-        // win.add(new SudokuBoard(new SudokuStub(4, 3)));
+        
         win.pack();
         win.setVisible(true);
-    }
-    
-    
-   /* public void paintComponent(java.awt.Graphics g){
-        super.paintComponent(g);
-         g.setColor(Color.BLACK);
-        
-        for(int i=0; i<col; i++){
-            for(int j = 0; j<rows; j++){
-                g.drawRect(50*i, 50*j, 50, 50);
-            }
-        }
-
-        
-       
-        
-        }
-//        g.setColor(Color.BLACK);
-//        g.drawRect(2, 2, 50, 50);
-//        
-//        g.setColor(c);
-//        //g.fillRect(2, 2, 50, 50);
-        
-*/
         
     }
+    
+}
+   
+    
+    
+        
+    
     
     
     

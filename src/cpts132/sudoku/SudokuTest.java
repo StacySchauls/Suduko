@@ -1,5 +1,7 @@
 package cpts132.sudoku;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -9,12 +11,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * Class to create a test board for the Sudoku board
- * @author Stacy Schauls
- * @version Minimal
+ *
+ * @author Stacy
  */
-public class SudokuBoardTest {
-    //Fields
+public class SudokuTest implements ActionListener{
+
         JFrame win;
         JPanel controls;
         SudokuBase base;
@@ -27,29 +28,18 @@ public class SudokuBoardTest {
         JTextField txtRow;
         JTextField txtCol;
         
-    /**
-     * The method to create different instances regarding the board
-     * @param row the number of rows for the board
-     * @param col the number of columns for the board
-     */
-    public SudokuBoardTest(int row, int col) {
-        //create the title for the board
+    public SudokuTest(int row, int col) {
         String title = row + "x" + col + " Board";
-        //create the window
         win = new JFrame(title);
         win.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //create the base using the SudokuStub
         base = new SudokuStub(row, col);
-        //create the board from the base
         board = new SudokuBoard(base);
-        //create a panel to  put the board on
         JPanel pnl = new JPanel();
         pnl.add(board);
-        pnl.setBackground(java.awt.Color.cyan);
+        pnl.setBackground(Color.cyan);
         win.add(pnl);
-        //create a new panel for the board
         controls = new JPanel();
-        win.add(controls, java.awt.BorderLayout.SOUTH);
+        win.add(controls, BorderLayout.SOUTH);
         pnl = new JPanel();
         controls.add(pnl);
         output = new JLabel();
@@ -57,7 +47,7 @@ public class SudokuBoardTest {
             selected = (SelectedCell) board;
             pnl.add(query = new JButton("Query"));
             pnl.add(output);
-            query.addActionListener((ActionListener) this);
+            query.addActionListener(this);
             controls.add(pnl = new JPanel());
             pnl.add(new JLabel("row:"));
             pnl.add(txtRow = new JTextField(2));
@@ -66,7 +56,7 @@ public class SudokuBoardTest {
             pnl.add(set = new JButton("Set"));
             pnl.add(error = new JLabel());
             error.setForeground(java.awt.Color.red);
-            set.addActionListener((ActionListener) this);
+            set.addActionListener(this);
             controls.setLayout(new java.awt.GridLayout(2, 1));
         } else {
             pnl.add(output);
@@ -74,12 +64,12 @@ public class SudokuBoardTest {
         }
         win.setVisible(true);
         win.pack();
+        
+        
+        
     }
-    
-    /**
-     * The actionlistener method for the class, used for the selected cell
-     * @param e the action event
-     */
+
+    @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == query) {
             output.setText("Selected cell: " +
@@ -101,6 +91,11 @@ public class SudokuBoardTest {
         }
         win.pack();
     }
-    }
+    
+ }
+    
+   
+       
+    
     
 

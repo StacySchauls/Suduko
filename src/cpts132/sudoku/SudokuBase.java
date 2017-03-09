@@ -8,6 +8,11 @@ public abstract class SudokuBase extends java.util.Observable {
     
     public enum State {COMPLETE, INCOMPLETE, ERROR};
     
+    /**
+     * Constructor for the Sudoku base
+     * @param layoutRows the number of rows for the board
+     * @param layoutColumns the number of columns for the board
+     */
     public SudokuBase(int layoutRows, int layoutColumns) {
         rows = layoutRows;
         columns = layoutColumns;
@@ -15,14 +20,26 @@ public abstract class SudokuBase extends java.util.Observable {
        
     }
     
+    /**
+     * method to get the number of rows in the board
+     * @return the number of rows in the board
+     */
     public int getRows() {
         return rows;
     }
     
+    /**
+     * method to return the number of columns in the board
+     * @return the number of columns in the board
+     */
     public int getColumns() {
         return columns;
     }
     
+    /**
+     * method to return the size of the board
+     * @return the size of the board
+     */
     public int getSize() {
         return size;
     }

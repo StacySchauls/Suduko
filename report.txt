@@ -1,0 +1,20 @@
+Stacy Schauls	Sudoku Minimal
+
+
+1. I went about this project by resaerching containers and components, and how id 
+implement these, and how id make a board.
+
+2. Dsign decisions that i made were in the main class. I made the fields "rows" 
+"cols" and "size" because //i needed to use them in the constructor as well a in the 
+paintComponent of thar class.
+
+3. Wht works is really being able to grasp the flow of how these components and containers
+actually work together. What doesnt work is "winging" it. I found that asking for help
+really does help.
+
+4. The biggest surprise that I encountered was the fact that I couldnt understnd or figure 
+out how to do anything on this asignment. For some reason it was very hard to grasp.
+
+5. I learned to not be afraid to ask for help when I need it.
+
+6.Next time I will do some more research on the topic.

@@ -1,6 +1,7 @@
 package cpts132.sudoku;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class SudokuModel extends SudokuCore {
      //array for each number that should be. 1-size
@@ -22,7 +23,15 @@ public class SudokuModel extends SudokuCore {
     public State getRowState(int n) {
         //populate the number array
         for(int k =0;k<super.getSize(); k++){
-           // numbers[k]=k+1;
+            numbers[k]=k+1;
+            values[k] = k+1;
+           /* for(int i=0; i<values.length/2; i++){
+                int temp = values[i];
+                values[i] = values[values.length-1-i];
+                values[values.length-1-i]=temp;
+                
+            }*/
+            
         }
         //populate the value array
        for(int i = 0; i<super.getSize();i++){
@@ -103,9 +112,42 @@ public class SudokuModel extends SudokuCore {
      */
     @Override
     public State getRegionState(int n) { 
+        n=4;
+        System.out.println("Number of columns: "+ super.getColumns());
+        System.out.println("Size: "+ super.getSize());
+        System.out.println("Region: "+n);
+        int cnt =0;
+         //populate the number array
+        for(int k =0;k<super.getSize(); k++){
+            numbers[k]=k+1;       
+        }
+        
+        if(n%2==0){
+            for(int i=0+n; i<super.getRows()+n;i++){
+                for(int j=0; j<super.getColumns();j++){
+                    values[cnt]=super.getValue(i,j);
+                    cnt++;
+            }
+         System.out.println("Region: "+n + " " + Arrays.toString(values));
+            
+        }
+       
+        
+        
+       
         return State.ERROR; 
+    }else{
+            for(int i=0; i<super.getRows();i++){
+                for(int j=0+n-1; j<super.getColumns()+n-1;j++){
+                    values[cnt]=super.getValue(i,j);
+                     System.out.println("Region: "+n + " " + Arrays.toString(values));
+                    cnt++;
+                }
+            }
+            System.out.println("Region: "+n + " " + Arrays.toString(values));
+            return State.COMPLETE;
+        }
     }
-    
     /**
      * Helper method to check if two arrays contain the same values
      * @param arr1 the first array passed in

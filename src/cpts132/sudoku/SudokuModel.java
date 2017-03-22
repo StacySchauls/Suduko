@@ -21,45 +21,30 @@ public class SudokuModel extends SudokuCore {
      */
     @Override
     public State getRowState(int n) {
+        int cnt = 0;
+        RowIterator it = new RowIterator(n);
         //populate the number array
         for(int k =0;k<super.getSize(); k++){
             numbers[k]=k+1;
-            values[k] = k+1;
-           /* for(int i=0; i<values.length/2; i++){
-                int temp = values[i];
-                values[i] = values[values.length-1-i];
-                values[values.length-1-i]=temp;
-                
-            }*/
-            
         }
-        //populate the value array
-       for(int i = 0; i<super.getSize();i++){
-            for(int j=0; j<super.getSize(); j++){
-                values[j] = super.getValue(i, j);
-                //check if the array contains a zero, retrun incomplete if so
-                if(values[j]==0){
-                    return State.INCOMPLETE;
-                }
+        
+        //run a loop while there is still a number to get
+        while(it.hasNext()){
+            //record the value that was gotten
+            values[cnt] = it.next();
+            //check if there is a zero
+            if(values[cnt] == 0){
+                return State.INCOMPLETE;
             }
-            //System.out.println("values: Row: " +i+ ": " + Arrays.toString(values));
-            //check if the arrays contain the same values. if so return complete
-            if(this.compareArrays(numbers, values)){
-                return State.COMPLETE;
-            }
-
+            cnt++;
         }
-     
-        //check for duplicates in the rows, return error if so
-        for(int i=0;i<values.length;i++){
-               for(int j=i;j<values.length-1;j++){
-                   if(values[i] == values[j+1]){
-                       return State.ERROR;
-                   }
-               } 
-            }
-        //default
-        return State.INCOMPLETE;
+        //check if the values in the row contain all the needed values. 1-size
+        if(this.compareArrays(values, numbers)){
+            return State.COMPLETE;
+        }else{
+            //else there is a duplicate
+            return State.ERROR;
+        }    
     }
     
     /**
@@ -69,40 +54,32 @@ public class SudokuModel extends SudokuCore {
      */
     @Override
     public State getColumnState(int n) { 
+        int cnt = 0;
+        ColIterator it = new ColIterator(n);
         //populate the number array
         for(int k =0;k<super.getSize(); k++){
-            numbers[k]=k+1;       
+            numbers[k]=k+1;
+        }
+        
+        //run a loop while there is still a number to get
+        while(it.hasNext()){
+            //record the value that was gotten
+            values[cnt] = it.next();
+            //check if there is a zero
+            if(values[cnt] == 0){
+                return State.INCOMPLETE;
+            }
+            cnt++;
+        }
+        System.out.println(Arrays.toString(values));
+        //check if the values in the row contain all the needed values. 1-size
+        if(this.compareArrays(values, numbers)){
+            return State.COMPLETE;
+        }else{
+            //else there is a duplicate
+            return State.ERROR;
         }
 
-        
-        //populate the value array
-       for(int i = 0; i<super.getSize();i++){
-            for(int j=0; j<super.getSize(); j++){
-                values[j] = super.getValue(j, i);
-                
-                //check if the array contains a zero, retrun incomplete if so
-                if(values[j]==0){
-                    return State.INCOMPLETE;
-                }
-            }
-           // System.out.println(Arrays.toString(numbers));
-           //System.out.println("column: " +i+ ": " + Arrays.toString(values));
-        }
-       //check if the arrays contain the same values. if so return complete
-       if(this.compareArrays(numbers, values)){
-                return State.COMPLETE;
-            }
-       
-       //check for duplicates in the rows, return error if so
-        for(int i=0;i<values.length;i++){
-               for(int j=i;j<values.length-1;j++){
-                   if(values[i] == values[j+1]){
-                       return State.ERROR;
-                   }
-               } 
-            }
-        //default
-        return State.INCOMPLETE;
     }
     
     /**
@@ -112,7 +89,9 @@ public class SudokuModel extends SudokuCore {
      */
     @Override
     public State getRegionState(int n) { 
-        n=4;
+        
+        /*
+        n=3;
         System.out.println("Number of columns: "+ super.getColumns());
         System.out.println("Size: "+ super.getSize());
         System.out.println("Region: "+n);
@@ -121,33 +100,52 @@ public class SudokuModel extends SudokuCore {
         for(int k =0;k<super.getSize(); k++){
             numbers[k]=k+1;       
         }
-        
-        if(n%2==0){
-            for(int i=0+n; i<super.getRows()+n;i++){
+        if(super.getSize()%2==0){
+            
+            if(n%2==0){
+                for(int i=0+n; i<super.getRows()+n;i++){
+                    for(int j=0; j<super.getColumns();j++){
+                        values[cnt]=super.getValue(i,j);
+                        cnt++;
+                }
+             
+
+            }
+                System.out.println("Region: "+n + " " + Arrays.toString(values));
+               return State.ERROR; 
+    }else{
+            for(int i=0; i<super.getRows();i++){
                 for(int j=0; j<super.getColumns();j++){
                     values[cnt]=super.getValue(i,j);
                     cnt++;
-            }
-         System.out.println("Region: "+n + " " + Arrays.toString(values));
-            
-        }
-       
-        
-        
-       
-        return State.ERROR; 
-    }else{
-            for(int i=0; i<super.getRows();i++){
-                for(int j=0+n-1; j<super.getColumns()+n-1;j++){
-                    values[cnt]=super.getValue(i,j);
-                     System.out.println("Region: "+n + " " + Arrays.toString(values));
-                    cnt++;
                 }
+                
             }
             System.out.println("Region: "+n + " " + Arrays.toString(values));
             return State.COMPLETE;
         }
     }
+        return State.COMPLETE;
+        */
+        
+        
+        RegionIterator it = new RegionIterator(n);
+        int cnt = 0;
+        //populate the number array
+        for(int k =0;k<super.getSize(); k++){
+            numbers[k]=k+1;
+        }
+        
+        //run a loop while there is still a number to get
+        while(it.hasNext() && cnt<getSize()){
+            //record the value that was gotten
+            values[cnt] = it.next();
+            cnt++;
+        }
+        System.out.println(Arrays.toString(values));
+    return null;
+}
+
     /**
      * Helper method to check if two arrays contain the same values
      * @param arr1 the first array passed in
@@ -167,4 +165,107 @@ public class SudokuModel extends SudokuCore {
 
         return Arrays.equals(arr1, arr2);
     }
+    
+    
+    
+    java.util.Iterator<Integer> getRowIterator(int n){
+        return new RowIterator(n);
+    }
+    
+    
+    
+    class RowIterator implements java.util.Iterator<Integer>{
+            private int col, row;
+
+            public RowIterator(int n){
+                col = 0;
+                row = n;
+            }
+                @Override
+                public boolean hasNext() {
+                    return col<getSize();
+                }
+
+                @Override
+                public Integer next() {
+                   return getValue(row,col++);
+                }
+                
+            @Override
+                public void remove(){
+                    throw new UnsupportedOperationException("remove not implememnted");
+                }
+
+
+                    
+    }
+    
+    
+    class ColIterator implements java.util.Iterator<Integer>{
+            private int col, row;
+
+            public ColIterator(int n){
+                col = n;
+                row = 0;
+            }
+                @Override
+                public boolean hasNext() {
+                    return row<getSize();
+                }
+
+                @Override
+                public Integer next() {
+                   return getValue(row++,col);
+                }
+                
+            @Override
+                public void remove(){
+                    throw new UnsupportedOperationException("remove not implememnted");
+                }
+
+
+                    
+            }
+    
+    class RegionIterator implements java.util.Iterator<Integer>{
+        private int col, row;
+        public RegionIterator(int n){
+            if(n<getColumns()){
+                col = n*getColumns();
+                row = 0;
+            }else if(n>=getColumns()){
+                
+            }
+            
+        }
+        @Override
+        public boolean hasNext() {
+            return col<getSize() && row < getSize();
+        }
+
+        @Override
+        public Integer next() {
+            System.out.println("Row: "+ row+ " Col: " +col +" Value: " +getValue(row,col));
+  
+            if(row==getRows()-1 && col==getColumns()-1){
+                System.out.println("Rows == getRows && col value:  "+getValue(row,col) );
+                 return getValue(row, col);
+            }
+            if(col==getColumns()-1){
+                System.out.println("Col == getColumns value: "+getValue(row,col));
+                int x=getValue(row,col);
+                row++;
+                col=0;
+                 return x;
+            }
+           
+            return getValue(row,col++);
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove not implememnted");
+        }
+    }
 }
+    

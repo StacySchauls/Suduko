@@ -130,6 +130,7 @@ public class SudokuModel extends SudokuCore {
         
         
         RegionIterator it = new RegionIterator(n);
+        n=1;
         int cnt = 0;
         //populate the number array
         for(int k =0;k<super.getSize(); k++){
@@ -229,8 +230,15 @@ public class SudokuModel extends SudokuCore {
     
     class RegionIterator implements java.util.Iterator<Integer>{
         private int col, row;
+        
         public RegionIterator(int n){
-            if(n<getColumns()){
+            n=2;
+            if(n==getSize()-1){
+                col=getColumns()-1;
+                row=getRows()-1;
+            }
+            if(n*getColumns()<=getSize()-1){
+                System.out.println("n<=: number col: "+getColumns());
                 col = n*getColumns();
                 row = 0;
             }else if(n>=getColumns()){
@@ -246,7 +254,19 @@ public class SudokuModel extends SudokuCore {
         @Override
         public Integer next() {
             System.out.println("Row: "+ row+ " Col: " +col +" Value: " +getValue(row,col));
-  
+            if((getSize()%(col+1)) == 0){
+                System.out.println("Col == getColumns value: "+getValue(row,col));
+                int x=getValue(row,col);
+                row++;
+                col=0;
+                 return x;
+            }
+            
+            if((getSize()%(row+1)==0) && (getSize()%(col+1) ==0)){
+                System.out.println("Row: "+ row+ " Col: " +col +" Value: " +getValue(row,col)); 
+                return getValue(row, col);
+            }
+  /*
             if(row==getRows()-1 && col==getColumns()-1){
                 System.out.println("Rows == getRows && col value:  "+getValue(row,col) );
                  return getValue(row, col);
@@ -258,8 +278,9 @@ public class SudokuModel extends SudokuCore {
                 col=0;
                  return x;
             }
-           
+        */   System.out.println("BRUH");
             return getValue(row,col++);
+
         }
 
         @Override

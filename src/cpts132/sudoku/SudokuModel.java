@@ -232,18 +232,10 @@ public class SudokuModel extends SudokuCore {
         private int col, row;
         
         public RegionIterator(int n){
-            n=2;
-            if(n==getSize()-1){
-                col=getColumns()-1;
-                row=getRows()-1;
-            }
-            if(n*getColumns()<=getSize()-1){
-                System.out.println("n<=: number col: "+getColumns());
-                col = n*getColumns();
-                row = 0;
-            }else if(n>=getColumns()){
-                
-            }
+            n=0;
+            row = (n/getRows()) * getRows();
+            col = (n%getRows()) * getColumns();
+            System.out.println("Row, Col: " + row+","+col);
             
         }
         @Override
@@ -254,31 +246,9 @@ public class SudokuModel extends SudokuCore {
         @Override
         public Integer next() {
             System.out.println("Row: "+ row+ " Col: " +col +" Value: " +getValue(row,col));
-            if((getSize()%(col+1)) == 0){
-                System.out.println("Col == getColumns value: "+getValue(row,col));
-                int x=getValue(row,col);
-                row++;
-                col=0;
-                 return x;
+            if(){
+                
             }
-            
-            if((getSize()%(row+1)==0) && (getSize()%(col+1) ==0)){
-                System.out.println("Row: "+ row+ " Col: " +col +" Value: " +getValue(row,col)); 
-                return getValue(row, col);
-            }
-  /*
-            if(row==getRows()-1 && col==getColumns()-1){
-                System.out.println("Rows == getRows && col value:  "+getValue(row,col) );
-                 return getValue(row, col);
-            }
-            if(col==getColumns()-1){
-                System.out.println("Col == getColumns value: "+getValue(row,col));
-                int x=getValue(row,col);
-                row++;
-                col=0;
-                 return x;
-            }
-        */   System.out.println("BRUH");
             return getValue(row,col++);
 
         }

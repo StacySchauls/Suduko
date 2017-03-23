@@ -1,10 +1,10 @@
 package cpts132.sudoku;
 
 import java.util.Arrays;
-import java.util.Iterator;
+
 
 public class SudokuModel extends SudokuCore {
-     //array for each number that should be. 1-size
+        //array for each number that should be. 1-size
         private int[] numbers = new int[super.getSize()];
         //array of values in the row
         private int[] values = new int[super.getSize()];
@@ -127,43 +127,42 @@ public class SudokuModel extends SudokuCore {
     public boolean compareArrays(int[] arr1, int[] arr2){
         Arrays.sort(arr1);
         Arrays.sort(arr2);
-       // System.out.println("NUMBERS: "+Arrays.toString(arr1)+ "\n" + "VALUES: " 
-               // +Arrays.toString(arr2));
-        if(Arrays.equals(arr1, arr2)){
-            //System.out.println("SAME");
-        }else{
-           // System.out.println("FASLE");
-        } 
-
         return Arrays.equals(arr1, arr2);
     }
-    
-    
-    
-    java.util.Iterator<Integer> getRowIterator(int n){
-        return new RowIterator(n);
-    }
-    
-    
-    
+ 
     class RowIterator implements java.util.Iterator<Integer>{
             private int col, row;
 
+            /**
+             * Row iterator constructor
+             * @param n the row to iterate over
+             */
             public RowIterator(int n){
                 col = 0;
                 row = n;
             }
                 @Override
+                /**
+                * method to check whether the iterator has a next value to to
+                * @return returns true or false
+                */
                 public boolean hasNext() {
                     return col<getSize();
                 }
 
                 @Override
+                /**
+                 * method to get the next value for the iterator
+                 * @returns the Integer value
+                 */
                 public Integer next() {
                    return getValue(row,col++);
                 }
                 
-            @Override
+                @Override
+                /**
+                 * unused method to remove a value
+                 */
                 public void remove(){
                     throw new UnsupportedOperationException("remove not implememnted");
                 }
@@ -172,25 +171,43 @@ public class SudokuModel extends SudokuCore {
                     
     }
     
-    
+    /**
+     * Column iterator class
+     */
     class ColIterator implements java.util.Iterator<Integer>{
+        //the rows and columns of the iterator
             private int col, row;
-
+            
+            /**
+             * Column iterator constructor
+             * @param n the column to iterate over
+             */
             public ColIterator(int n){
                 col = n;
                 row = 0;
             }
                 @Override
+                /**
+                * method to check whether the iterator has a next value to to
+                * @return returns true or false
+                */
                 public boolean hasNext() {
                     return row<getSize();
                 }
 
                 @Override
+                /**
+                 * method to get the next value for the iterator
+                 * @returns the Integer value
+                 */
                 public Integer next() {
                    return getValue(row++,col);
                 }
                 
-            @Override
+                @Override
+                /**
+                 * unused method to remove a value
+                 */
                 public void remove(){
                     throw new UnsupportedOperationException("remove not implememnted");
                 }
@@ -198,10 +215,16 @@ public class SudokuModel extends SudokuCore {
 
                     
             }
-    
+    /**
+     *  Region iterator class
+    */
     class RegionIterator implements java.util.Iterator<Integer>{
         private int col, row;
         
+        /*
+        * Constructor for the region iterator
+        * @param n the region to iterate over
+        */
         public RegionIterator(int n){
 
             row = (n/getRows()) * getRows();
@@ -210,33 +233,40 @@ public class SudokuModel extends SudokuCore {
             
         }
         @Override
+        /**
+         * method to check whether the iterator has a next value to to
+         * @return returns true or false
+        */
         public boolean hasNext() {
             return col<getSize() && row < getSize();
         }
 
         @Override
+        /**
+         * method to get the next value for the iterator
+         * @returns the Integer value
+         */
         public Integer next() {
-            //System.out.println("Row: "+ row+ " Col: " +col +" Value: " +getValue(row,col));
+            //cehck if the iterator is in the last column of the region
             if((col+1) % (getColumns()) == 0 && col != 0){
-                //System.out.println("Entered col loop: Col= "+col+ "col+1%getcol = "+ (col+1) % (getColumns()-1) );
-                 
-
-                // System.out.println("In col if: row: "+ row+" col: "+col);
+            
                 int x = getValue(row++, col);
+                //set the column back to the original
                 col = col - (getColumns()-1);
                 return x;
             }
-            
+            //check if the iterator is in the last row of the region
             if((row+1) % (getRows())==0){
-                //System.out.println("in row if, value is: " + getValue(row,col));
                 return getValue(row,col++);
             }
-            //System.out.println("REturning row, col++: " + getValue(row,col));
             return getValue(row,col++);
 
         }
 
         @Override
+        /**
+         * unused method to remove a value
+         */
         public void remove() {
             throw new UnsupportedOperationException("remove not implememnted");
         }

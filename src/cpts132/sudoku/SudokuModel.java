@@ -89,46 +89,7 @@ public class SudokuModel extends SudokuCore {
      */
     @Override
     public State getRegionState(int n) { 
-        
-        /*
-        n=3;
-        System.out.println("Number of columns: "+ super.getColumns());
-        System.out.println("Size: "+ super.getSize());
-        System.out.println("Region: "+n);
-        int cnt =0;
-         //populate the number array
-        for(int k =0;k<super.getSize(); k++){
-            numbers[k]=k+1;       
-        }
-        if(super.getSize()%2==0){
-            
-            if(n%2==0){
-                for(int i=0+n; i<super.getRows()+n;i++){
-                    for(int j=0; j<super.getColumns();j++){
-                        values[cnt]=super.getValue(i,j);
-                        cnt++;
-                }
-             
 
-            }
-                System.out.println("Region: "+n + " " + Arrays.toString(values));
-               return State.ERROR; 
-    }else{
-            for(int i=0; i<super.getRows();i++){
-                for(int j=0; j<super.getColumns();j++){
-                    values[cnt]=super.getValue(i,j);
-                    cnt++;
-                }
-                
-            }
-            System.out.println("Region: "+n + " " + Arrays.toString(values));
-            return State.COMPLETE;
-        }
-    }
-        return State.COMPLETE;
-        */
-        
-        
         RegionIterator it = new RegionIterator(n);
         n=1;
         int cnt = 0;
@@ -141,10 +102,20 @@ public class SudokuModel extends SudokuCore {
         while(it.hasNext() && cnt<getSize()){
             //record the value that was gotten
             values[cnt] = it.next();
+            if(values[cnt]==0){
+                return State.INCOMPLETE;
+            }
             cnt++;
         }
         System.out.println(Arrays.toString(values));
-    return null;
+        if(this.compareArrays(values, numbers)){
+            return State.COMPLETE;
+        }else{
+            //else there is a duplicate
+            return State.ERROR;
+        }
+        
+
 }
 
     /**
@@ -232,10 +203,10 @@ public class SudokuModel extends SudokuCore {
         private int col, row;
         
         public RegionIterator(int n){
-            n=0;
+
             row = (n/getRows()) * getRows();
             col = (n%getRows()) * getColumns();
-            System.out.println("Row, Col: " + row+","+col);
+            //System.out.println("Row, Col: " + row+","+col);
             
         }
         @Override
@@ -245,10 +216,22 @@ public class SudokuModel extends SudokuCore {
 
         @Override
         public Integer next() {
-            System.out.println("Row: "+ row+ " Col: " +col +" Value: " +getValue(row,col));
-            if(){
-                
+            //System.out.println("Row: "+ row+ " Col: " +col +" Value: " +getValue(row,col));
+            if((col+1) % (getColumns()) == 0 && col != 0){
+                //System.out.println("Entered col loop: Col= "+col+ "col+1%getcol = "+ (col+1) % (getColumns()-1) );
+                 
+
+                // System.out.println("In col if: row: "+ row+" col: "+col);
+                int x = getValue(row++, col);
+                col = col - (getColumns()-1);
+                return x;
             }
+            
+            if((row+1) % (getRows())==0){
+                //System.out.println("in row if, value is: " + getValue(row,col));
+                return getValue(row,col++);
+            }
+            //System.out.println("REturning row, col++: " + getValue(row,col));
             return getValue(row,col++);
 
         }

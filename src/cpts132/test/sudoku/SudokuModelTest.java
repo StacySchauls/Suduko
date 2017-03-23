@@ -27,7 +27,7 @@ public class SudokuModelTest {
         //for(int i = 0; i < size; i++)
           //  System.out.println("Column " + i + " state: " + model.getColumnState(i));
 
-        for(int i = 0; i < 1; i++)
+        for(int i = 0; i < size; i++)
             System.out.println("Region " + i + " state: " + model.getRegionState(i));
         System.out.println();
         
@@ -35,7 +35,7 @@ public class SudokuModelTest {
     }
     
     public static void main(String[] args) {
-        randomTest(2,2);
+        randomTest(2,3);
         //randomTest(2,3);
         //randomTest(3,3);
     }

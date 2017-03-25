@@ -21,11 +21,11 @@ public class SudokuModelTest {
         System.out.println(model);
         
         // report state
-        //for(int i = 0; i < size; i++)
-            //System.out.println("Row " + i + " state: " + model.getRowState(i));
+        for(int i = 0; i < size; i++)
+            System.out.println("Row " + i + " state: " + model.getRowState(i));
         
-        //for(int i = 0; i < size; i++)
-          //  System.out.println("Column " + i + " state: " + model.getColumnState(i));
+        for(int i = 0; i < size; i++)
+            System.out.println("Column " + i + " state: " + model.getColumnState(i));
 
         for(int i = 0; i < size; i++)
             System.out.println("Region " + i + " state: " + model.getRegionState(i));

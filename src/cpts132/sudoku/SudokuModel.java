@@ -107,7 +107,6 @@ public class SudokuModel extends SudokuCore {
             }
             cnt++;
         }
-        System.out.println(Arrays.toString(values));
         if(this.compareArrays(values, numbers)){
             return State.COMPLETE;
         }else{

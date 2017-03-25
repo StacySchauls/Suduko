@@ -1,0 +1,21 @@
+Stacy Schauls	3/23/17		Sudoku Model	Version: challenge	
+
+1. I went about this project by first drawing pictures of what I neeeded to do, to acomplish the goal of transversing the rows and columns. 
+
+2. I used fields such as an array called "values" and an array called "numbers". They were feilds because I needed to use them in each of
+my classes, the Row iterator, the column iterator and the region iterator. The values array held the values that the row and column and regions held,
+and the numbers was the array that held the values that the value array should have held. the two were then compared to each other, that way I
+knew if the states were complete or not.
+
+3. What worked was drawing pictures and understanding what you need to do, before coding the problem. Consequently, jumping straight into the 
+problem does not work. It helps to think about the problem first.
+
+4. I was unpleasently surprised with how hard it would be for me to be able to traverse the regions. This gave me a real challenge; but after asking
+enough clarifying questions, and thinking about it hard enough I was able to use an iterator to traverset he region, and start on a certain region,
+given the number of that region.
+
+5. I learned to never give up! Even if you're completely lost, continue to ask questions, get clarifying answers, and continue. I now know how to 
+properly traverse a grid of numbers, compare and check their states.
+
+6. Next time, I will make sure I fully understand the problem at hand before jumpnig into it, making sure I also know the tools I will need
+to tackle the problem.

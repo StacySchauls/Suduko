@@ -1,5 +1,4 @@
 package cpts132.sudoku;
-
 import java.util.Arrays;
 
 

@@ -28,10 +28,10 @@ public class SudokuBoard extends javax.swing.JComponent {
         return null;
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args){
         
  
-        new SudokuBoardTest(2,3);
+        new SudokuBoardTest(3,3);
         
    
     }
@@ -44,7 +44,7 @@ public class SudokuBoard extends javax.swing.JComponent {
      */
    public void paintComponent(java.awt.Graphics g){
        super.paintComponent(g);
-       System.out.println("Cols: " + cols +" Rows: "+rows +" Size: "+size);
+       //System.out.println("Cols: " + cols +" Rows: "+rows +" Size: "+size);
        g.setColor(Color.black);
        for(int k= 0; k<size; k++){
             for(int i = 0; i<size; i++){

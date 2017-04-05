@@ -11,7 +11,7 @@ import java.awt.event.MouseListener;
  */
 public class SelectCell implements SelectedCell, MouseListener{
 
-    private int x =0;
+    private int x = 0;
     private int y = 0;
     @Override
     public void setSelected(int row, int col) {
@@ -30,15 +30,19 @@ public class SelectCell implements SelectedCell, MouseListener{
         return x/50;
     }
 
+    
     @Override
     public void mouseClicked(MouseEvent e){
          x = e.getX();
          y = e.getY();
         System.out.println("X: " + x + "Y: " +y);
+        System.out.println("Pressed");
         this.getSelectedRow();
         this.getSelectedColumn();
         
     }
+
+ 
 
     @Override
     public void mousePressed(MouseEvent e) {

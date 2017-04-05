@@ -2,6 +2,7 @@ package cpts132.sudoku;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -57,7 +58,8 @@ public class SudokuBoardTest {
             selected = (SelectedCell) board;
             pnl.add(query = new JButton("Query"));
             pnl.add(output);
-            query.addActionListener((ActionListener) this);
+            query.addMouseListener(board);
+            //query.addActionListener((ActionListener) this);
             controls.add(pnl = new JPanel());
             pnl.add(new JLabel("row:"));
             pnl.add(txtRow = new JTextField(2));
@@ -66,7 +68,8 @@ public class SudokuBoardTest {
             pnl.add(set = new JButton("Set"));
             pnl.add(error = new JLabel());
             error.setForeground(java.awt.Color.red);
-            set.addActionListener((ActionListener) this);
+            set.addMouseListener(board);
+           // set.addActionListener((ActionListener) this);
             controls.setLayout(new java.awt.GridLayout(2, 1));
         } else {
             pnl.add(output);

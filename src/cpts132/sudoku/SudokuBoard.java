@@ -2,26 +2,35 @@ package cpts132.sudoku;
 
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 
 
-public class SudokuBoard extends javax.swing.JComponent {
+
+public class SudokuBoard extends javax.swing.JComponent implements SelectedCell, MouseListener{
   //the dimensions of the board
     private int rows;
     private int cols;
     private int size;
+    private int x = 0;
+    private int y = 0;
+
     
     /**
      * constructor for the class. sets up the rows, columns and size
-     * @param b the sudoku base
+     * @param b the Sudoku base
      */
     public SudokuBoard(SudokuBase b) {
+      
       setPreferredSize(new java.awt.Dimension(b.getSize()*50, b.getSize()*50));
       this.setBorder(BorderFactory.createLineBorder(Color.black));
+      this.addMouseListener(this);
       rows = b.getRows();
       cols = b.getColumns();
       size = b.getSize();
 
+      
     }
     
     SudokuBase getBase() {
@@ -31,7 +40,7 @@ public class SudokuBoard extends javax.swing.JComponent {
     public static void main(String[] args){
         
  
-        new SudokuBoardTest(3,3);
+        new SudokuBoardTest(2,3);
         
    
     }
@@ -52,12 +61,70 @@ public class SudokuBoard extends javax.swing.JComponent {
                     g.fillRect(i*50, k*50, 49, 49);
                     g.setColor(Color.black);
                     g.drawRect(i*50, k*50, 49, 49);
-
             }
        }
+       g.setColor(Color.black);
+       g.drawRect((x/50)*50, (y/50)*50, 49, 49);
+       g.setColor(Color.YELLOW);
+       g.fillRect( (x/50)*50, (y/50)*50, 49, 49);
+       
+       
        
        
      }
+   
+   
+
+    @Override
+     public void setSelected(int row, int col) {
+        
+    }
+
+    @Override
+    public int getSelectedRow() {
+        System.out.println("Row: "+ (y/50));
+        return y/50;
+    }
+
+    @Override
+    public int getSelectedColumn() {
+        System.out.println("Column: "+ (x/50));
+        return x/50;
+    }
+
+    
+    @Override
+    public void mouseClicked(MouseEvent e){
+         x = e.getX();
+         y = e.getY();
+        System.out.println("X: " + x + "Y: " +y);
+        System.out.println("Pressed");
+        int cornerX = this.getSelectedRow();
+        int cornerY = this.getSelectedColumn();
+        repaint();
+    }
+
+ 
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
+  
+
+    
     
 }
    

@@ -29,6 +29,7 @@ public class SudokuTest implements ActionListener{
         JTextField txtCol;
         
     public SudokuTest(int row, int col) {
+        
         String title = row + "x" + col + " Board";
         win = new JFrame(title);
         win.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -47,7 +48,7 @@ public class SudokuTest implements ActionListener{
             selected = (SelectedCell) board;
             pnl.add(query = new JButton("Query"));
             pnl.add(output);
-            query.addActionListener(this);
+            query.addActionListener((ActionListener) this);
             controls.add(pnl = new JPanel());
             pnl.add(new JLabel("row:"));
             pnl.add(txtRow = new JTextField(2));
@@ -56,7 +57,7 @@ public class SudokuTest implements ActionListener{
             pnl.add(set = new JButton("Set"));
             pnl.add(error = new JLabel());
             error.setForeground(java.awt.Color.red);
-            set.addActionListener(this);
+            set.addActionListener((ActionListener) this);
             controls.setLayout(new java.awt.GridLayout(2, 1));
         } else {
             pnl.add(output);
@@ -71,13 +72,16 @@ public class SudokuTest implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("Pressed");
         if(e.getSource() == query) {
+            System.out.println("Query");
             output.setText("Selected cell: " +
                            selected.getSelectedRow() + ", " +
                            selected.getSelectedColumn());
             error.setText("");
         } else if(e.getSource() == set) {
             output.setText("");
+            System.out.println("SET");
             try {
                 int row = Integer.parseInt(txtRow.getText());
                 int col = Integer.parseInt(txtCol.getText());
@@ -91,6 +95,8 @@ public class SudokuTest implements ActionListener{
         }
         win.pack();
     }
+   
+
     
  }
     

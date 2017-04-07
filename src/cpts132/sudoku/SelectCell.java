@@ -15,7 +15,8 @@ public class SelectCell implements SelectedCell, MouseListener{
     private int y = 0;
     @Override
     public void setSelected(int row, int col) {
-        
+        x = 50*col;
+        y = 50*row;
     }
 
     @Override

@@ -40,7 +40,7 @@ public class SudokuBoard extends javax.swing.JComponent implements SelectedCell,
     public static void main(String[] args){
         
  
-        new SudokuBoardTest(2,3);
+        new SudokuBoardTest(3,3);
         
    
     }
@@ -66,18 +66,16 @@ public class SudokuBoard extends javax.swing.JComponent implements SelectedCell,
        g.setColor(Color.black);
        g.drawRect((x/50)*50, (y/50)*50, 49, 49);
        g.setColor(Color.YELLOW);
-       g.fillRect( (x/50)*50, (y/50)*50, 49, 49);
-       
-       
-       
-       
+       g.fillRect( (x/50)*50, (y/50)*50, 49, 49);  
      }
    
    
 
     @Override
      public void setSelected(int row, int col) {
-        
+        x = 50*col;
+        y = 50*row;
+        repaint();
     }
 
     @Override
@@ -91,16 +89,12 @@ public class SudokuBoard extends javax.swing.JComponent implements SelectedCell,
         System.out.println("Column: "+ (x/50));
         return x/50;
     }
-
+    
     
     @Override
     public void mouseClicked(MouseEvent e){
          x = e.getX();
          y = e.getY();
-        System.out.println("X: " + x + "Y: " +y);
-        System.out.println("Pressed");
-        int cornerX = this.getSelectedRow();
-        int cornerY = this.getSelectedColumn();
         repaint();
     }
 

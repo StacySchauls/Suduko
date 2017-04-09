@@ -16,6 +16,9 @@ public class SudokuView extends SudokuBoard{
     public SudokuView(SudokuBase b) {
         super(b);
         SudokuBoard board = new SudokuBoard(b);
+        SymbolRenderer r = new PrimarySymbols();
+        int value = 1;
+        r.drawSymbol(super.getGraphics(), 0, 0, value);
     }
 
     

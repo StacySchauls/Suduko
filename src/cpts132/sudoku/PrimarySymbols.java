@@ -13,12 +13,23 @@ import java.awt.geom.*;
 /**
  * Class to render symbols
  * @author Stacy
+ * @version Standard
  */
 public class PrimarySymbols implements SymbolRenderer {
 
     @Override
+     /**
+     * Renders symbols for the Sudoku game
+     * @param x The x-coordinate for the upper-left corner 
+     * of the symbol area (40x40 pixels)
+     * @param y The y-coordinate for the upper-left corner 
+     * of the symbol area (40x40 pixels)
+     * @param g The Graphics object used to draw the symbol
+     * @param value The value to be drawn, between 0 and 12,
+     * inclusive
+     */
     public void drawSymbol(java.awt.Graphics g, int x, int y, int value) {
-        
+       
         if(value<0 || value > 12){
             return;
         }
@@ -31,6 +42,7 @@ public class PrimarySymbols implements SymbolRenderer {
                 g.fillRect(x, y, 40, 40);
                 g.setColor(Color.white);
                 g.fillRect(x+5,y+5,30,30);
+                g.setColor(Color.BLACK);
                break;
                
             case 1:
@@ -38,6 +50,7 @@ public class PrimarySymbols implements SymbolRenderer {
                 g.fillOval(x, y, 40, 40);
                 g.setColor(Color.white);
                 g.fillOval(x+5, y+5, 30,30);
+                g.setColor(Color.BLACK);
                 break;
                 
             case 2: 
@@ -51,19 +64,21 @@ public class PrimarySymbols implements SymbolRenderer {
                 g.fillArc(x-15, y+5, 30, 30, -90, 180);
                 //right middle arc
                 g.fillArc(x+25, y+5, 30, 30, 90, 180);
+                g.setColor(Color.BLACK);
                break;
                
             case 3:
-                System.out.println("DRAW SYMBOL");
                 // X
                 g2.draw(new Line2D.Float(x, y, x+40, y+40));
                 g2.draw(new Line2D.Float(x+40, y, x, y+40));
+                g.setColor(Color.BLACK);
                 break;
                 
             case 4: 
                //+
                 g2.draw(new Line2D.Float(x+20, y, x+20, y+40));
                 g2.draw(new Line2D.Float(x, y+20, x+40, y+20));
+                g.setColor(Color.BLACK);
                break;
                
             case 5:
@@ -72,6 +87,7 @@ public class PrimarySymbols implements SymbolRenderer {
                 g2.draw(new Line2D.Float(x, y, x+40, y));
                 g2.draw(new Line2D.Float(x, y, x+40, y));
                 g2.draw(new Line2D.Float(x+20, y, x+20, y+40));
+                g.setColor(Color.BLACK);
                 break;
                 
             case 6:
@@ -79,6 +95,7 @@ public class PrimarySymbols implements SymbolRenderer {
                 g2.draw(new Line2D.Float(x, y, x, y+40));
                 g2.draw(new Line2D.Float(x+40, y, x+40, y+40));
                 g2.draw(new Line2D.Float(x, y+20, x+40, y+20));
+                g.setColor(Color.BLACK);
                break;
                
             case 7:
@@ -86,6 +103,7 @@ public class PrimarySymbols implements SymbolRenderer {
                 g2.draw(new Line2D.Float(x+20, y, x, y+40));
                 g2.draw(new Line2D.Float(x, y+40, x+40, y+40));
                 g2.draw(new Line2D.Float(x+20, y, x+40, y+40));
+                g.setColor(Color.BLACK);
                 break;
                 
             case 8: 
@@ -93,6 +111,7 @@ public class PrimarySymbols implements SymbolRenderer {
                 g2.draw(new Line2D.Float(x, y+40, x+40, y));
                 g2.draw(new Line2D.Float(x, y, x+40, y));
                 g2.draw(new Line2D.Float(x+40, y, x+40, y+40));
+                g.setColor(Color.BLACK);
                break;
                
             case 9:
@@ -103,6 +122,7 @@ public class PrimarySymbols implements SymbolRenderer {
                 g2.draw(new Line2D.Float(x+20, y, x+20, y));
                 g2.draw(new Line2D.Float(x+40, y+20, x+40, y+20));
                 g2.draw(new Line2D.Float(x+20, y+40, x+20, y+40));
+                g.setColor(Color.BLACK);
                 break;
                 
             case 10: 
@@ -112,6 +132,7 @@ public class PrimarySymbols implements SymbolRenderer {
                 g2.draw(new Line2D.Float(x+20, y, x+10, y+20));
                 g2.draw(new Line2D.Float(x+10, y+20, x+20, y+40));
                 g2.draw(new Line2D.Float(x+20, y+40, x, y+40));
+                g.setColor(Color.BLACK);
                break;
                
             case 11:
@@ -119,6 +140,7 @@ public class PrimarySymbols implements SymbolRenderer {
                 g2.fillArc(x, y, 40, 40, 90, 180);
                 g2.setColor(Color.white);
                 g2.fillArc(x+5, y, 30, 30, 90, 180);
+                g.setColor(Color.BLACK);
                 break;
              
             case 12:
@@ -127,13 +149,14 @@ public class PrimarySymbols implements SymbolRenderer {
                 int ypoints[] = {y,y+40,y+20,y,y+40};
                 int npoints = 5;
                 g2.drawPolygon(xpoints, ypoints, npoints);
+                g.setColor(Color.BLACK);
                 break;     
        }
       
     }
 
     
-    public static void main(String[] arhgs){
+    public static void main(String[] args){
         new SymbolRendererTest().testSymbols(new PrimarySymbols());
     }
 }

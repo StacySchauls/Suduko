@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  * @author Stacy Schauls
  * @version Minimal
  */
-public class SudokuBoardTest {
+public class SudokuBoardTest implements ActionListener{
     //Fields
         JFrame win;
         JPanel controls;
@@ -59,7 +59,7 @@ public class SudokuBoardTest {
             pnl.add(query = new JButton("Query"));
             pnl.add(output);
             query.addMouseListener(board);
-            //query.addActionListener((ActionListener) this);
+            query.addActionListener((ActionListener) this);
             controls.add(pnl = new JPanel());
             pnl.add(new JLabel("row:"));
             pnl.add(txtRow = new JTextField(2));
@@ -69,7 +69,7 @@ public class SudokuBoardTest {
             pnl.add(error = new JLabel());
             error.setForeground(java.awt.Color.red);
             set.addMouseListener(board);
-           // set.addActionListener((ActionListener) this);
+            set.addActionListener((ActionListener) this);
             controls.setLayout(new java.awt.GridLayout(2, 1));
         } else {
             pnl.add(output);

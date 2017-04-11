@@ -8,7 +8,6 @@ package cpts132.sudoku;
 import cpts132.test.sudoku.SymbolRendererTest;
 import java.awt.Color;
 import java.awt.*;
-
 import java.awt.geom.*;
 
 /**
@@ -19,11 +18,12 @@ public class PrimarySymbols implements SymbolRenderer {
 
     @Override
     public void drawSymbol(java.awt.Graphics g, int x, int y, int value) {
+        
         if(value<0 || value > 12){
             return;
         }
        Graphics2D g2 = (Graphics2D) g;
-     //  g2.setStroke(new BasicStroke(5));
+       g2.setStroke(new BasicStroke(5));
        //switch statement to know which symbol to draw
        switch (value){
             case 0:
@@ -54,6 +54,7 @@ public class PrimarySymbols implements SymbolRenderer {
                break;
                
             case 3:
+                System.out.println("DRAW SYMBOL");
                 // X
                 g2.draw(new Line2D.Float(x, y, x+40, y+40));
                 g2.draw(new Line2D.Float(x+40, y, x, y+40));

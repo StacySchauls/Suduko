@@ -5,6 +5,7 @@
  */
 package cpts132.sudoku;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -12,15 +13,22 @@ import java.awt.Graphics;
  * @author Stacy
  */
 public class SudokuView extends SudokuBoard{
+    private SudokuBase base;
+    private SymbolRenderer r;
     
     public SudokuView(SudokuBase b) {
         super(b);
         SudokuBoard board = new SudokuBoard(b);
-        SymbolRenderer r = new PrimarySymbols();
-        int value = 1;
-        r.drawSymbol(super.getGraphics(), 0, 0, value);
+        base = b;
+        r = new PrimarySymbols();
+        
     }
 
-    
-    
+    @Override
+    public void paintComponent(java.awt.Graphics g){
+        super.paintComponent(g);
+        g.setColor(Color.black);     
+        r.drawSymbol(g, 45, 45, 3);
+    }
+   
 }
